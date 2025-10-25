@@ -54,9 +54,6 @@ BOOL php_win32_shutdown_random_bytes(void);
 #if PHP_VERSION_ID < 80500
 BOOL php_win32_ioutil_init(void);
 #endif
-#if PHP_VERSION_ID < 80400
-void php_win32_init_gettimeofday(void);
-#endif
 #else
 #    define php_select(m, r, w, e, t) select(m, r, w, e, t)
 #    include <fcntl.h>
@@ -592,9 +589,6 @@ int main(int argc, char *argv[])
     // php_win32_signal_ctrl_handler_init();
 #if PHP_VERSION_ID < 80500
     php_win32_ioutil_init();
-#endif
-#if PHP_VERSION_ID < 80400
-    php_win32_init_gettimeofday();
 #endif
 
     _fmode = _O_BINARY;                 /* sets default for file streams to binary */
