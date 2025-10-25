@@ -13,6 +13,7 @@ vcruntime140 | Windows | 必须 Nessesary | 禁用sfx启动时GetModuleHandle(vc
 win32 | Windows | 必须 Nessesary | 修改构建系统以静态构建 Modify build system for build sfx file
 zend_stream | Windows | 必须 Nessesary | 修改构建系统以静态构建 Modify build system for build sfx file
 comctl32 | Windows | 可选 Optional | 添加comctl32.dll manifest以启用[visual style](https://learn.microsoft.com/en-us/windows/win32/controls/visual-styles-overview) (会让窗口控件好看一些) Add manifest dependency for comctl32 to enable [visual style](https://learn.microsoft.com/en-us/windows/win32/controls/visual-styles-overview) (makes window control looks modern)
+win32_api | Windows | 必须 Necessary | 修复一些win32 api的声明 Fix declarations of some win32 apis
 
 ## Usage
 
@@ -85,3 +86,10 @@ This bypasses many hard-coded cli SAPI name checks.
 允许Windows的cli静态构建，不是给micro用的
 
 This allows the Windows cli SAPI to be built fully statically. It is not a patch for micro.
+
+### win32_api
+
+修复一些win32 api的声明，避免编译警告。这些修改已经在新版本 PHP （>=8.4）中合并，但保证旧版本也能用，这些补丁仍然需要
+
+This fixes declarations of some win32 apis to avoid compilation warnings. These changes have been merged into newer versions of PHP (>=8.4), but to ensure that older versions can still be used, these patches are still needed.
+
