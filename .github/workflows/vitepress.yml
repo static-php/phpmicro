@@ -1,0 +1,30 @@
+name: Docs Auto Deploy
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+
+jobs:
+  build:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+
+      - run: cd docs && npm install
+
+      - name: Build
+        run: cd docs && npm run docs:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vitepress/dist
